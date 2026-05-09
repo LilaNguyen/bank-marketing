@@ -90,6 +90,15 @@ base_roc <- ggplot(roc_base_df, aes(x = fpr, y = tpr)) +
                   theme_light()
 base_roc
 
+# Save plot as image to folder
+ggsave(
+  filename = "plots/BaseROC.png",
+  plot = base_roc,
+  width = 6,
+  height = 5,
+  dpi = 300
+)
+
 
 # ------------------------- Interaction logistic regression model -------------------------
 model_interact <- glm(y_binary ~ age + job + marital + education + default + housing + loan + contact + 
@@ -172,10 +181,21 @@ compare_roc <- ggplot(roc_combined, aes(x = fpr, y = tpr, color = model, linewid
                       theme_light()
 compare_roc
 
+# Save plot as image to folder
+ggsave(
+  filename = "plots/compareROC.png",
+  plot = compare_roc,
+  width = 6,
+  height = 5,
+  dpi = 300
+)
+
 # Finding summary table
-final_model_comparison <- data.frame(Base_Deviance_Reduction = base_percent_devReduction, Selected_Deviance_Reduction = selected_percent_devReduction, 
-                                     Base_Pseudo_R2 = round(pR2(model_base)["McFadden"], 5), Selected_Pseudo_R2 = round(pR2(model_selected)["McFadden"], 5), Base_Sensitivity = base_sensitivity,
-                                     Selected_Sensitivity = selected_sensitivity, Base_Specificity = base_specificity, Selected_Specificity = selected_specificity)
+final_model_comparison <- data.frame(Deviance_Reduction = c(base_percent_devReduction, selected_percent_devReduction), 
+                                     Pseudo_R2 = c(round(pR2(model_base)["McFadden"], 5), round(pR2(model_selected)["McFadden"], 5)), Sensitivity = c(base_sensitivity,
+                                     selected_sensitivity), Specificity = c(base_specificity, selected_specificity), AUC = c(base_auc, selected_auc))
+colnames(final_model_comparison) <- c("Deviance Reduction [%]", "Pseudo R^2", "Sensitivity", "Specificity", "AUC")
+rownames(final_model_comparison) <- c("Base Additive", "Selected Interaction")
 View(final_model_comparison)
 
 
