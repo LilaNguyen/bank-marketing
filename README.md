@@ -58,8 +58,12 @@ bank-marketing/
 │   └── ...
 │
 ├── scripts/
-│   └── 02_hypothesis_testing
-│   └── 01_data_cleaning_and_eda.R
+│   ├── 01_data_cleaning_and_eda.R
+│   ├── 02_hypothesis_testing/
+│   │   ├── chi_square_test.R
+│   │   ├── hypothesis_testing.R
+│   │   └── t_test.R
+│   └── 03_logistic_regression_and_eval.R
 │
 ├── README.md
 └── .gitignore
