@@ -50,7 +50,7 @@ save_plot <- function(plot, name, width = 6, height = 4) {
 
 # Import Bank Marketing dataset
 bank <- read.csv(
-  "bank-marketing/data/bank-additional-full.csv", 
+  "data/bank-additional-full.csv", 
   sep = ";"
   )
 
