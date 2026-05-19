@@ -5,7 +5,8 @@ library(pROC)
 library(pscl)
 
 # Set working directory
-setwd("~/Desktop/MATH 167R/bank-marketing")
+# Set working directory to the bank-marketing project folder before running.
+
 
 # ------------------------- Load cleaned data set -------------------------
 source("scripts/01_data_cleaning_and_eda.R")
@@ -24,6 +25,7 @@ table(data$y_binary)
 
 
 # ------------------------- Create train/test split -------------------------
+set.seed(167)
 n <- nrow(data)
 train_index <- sample(1:n, size = 0.7 * n)
 
